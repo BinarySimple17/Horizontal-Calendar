@@ -1,5 +1,7 @@
 package devs.mulham.horizontalcalendar.adapter;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.View;
@@ -25,8 +27,9 @@ import devs.mulham.horizontalcalendar.utils.Utils;
  */
 public class DaysAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder, Calendar> {
 
-    public DaysAdapter(HorizontalCalendar horizontalCalendar, Calendar startDate, Calendar endDate, HorizontalCalendarPredicate disablePredicate, CalendarEventsPredicate eventsPredicate) {
-        super(R.layout.hc_item_calendar, horizontalCalendar, startDate, endDate, disablePredicate, eventsPredicate);
+    public DaysAdapter(HorizontalCalendar horizontalCalendar, Calendar startDate, Calendar endDate, HorizontalCalendarPredicate disablePredicate, CalendarEventsPredicate eventsPredicate,
+                       Context context) {
+        super(R.layout.hc_item_calendar, horizontalCalendar, startDate, endDate, disablePredicate, eventsPredicate, context);
     }
 
     @Override
@@ -62,6 +65,12 @@ public class DaysAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder, C
             holder.textBottom.setTextSize(TypedValue.COMPLEX_UNIT_SP, config.getSizeBottomText());
         } else {
             holder.textBottom.setVisibility(View.GONE);
+        }
+
+        if (holder.textMiddle.getText().equals("11")) {
+            holder.setDayColor(ContextCompat.getColor(super.getContext(), R.color.transparent25));
+        } else {
+            holder.setDayColor(ContextCompat.getColor(super.getContext(), R.color.transparent));
         }
 
         showEvents(holder, day);

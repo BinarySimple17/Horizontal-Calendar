@@ -1,5 +1,6 @@
 package devs.mulham.horizontalcalendar.adapter;
 
+import android.content.Context;
 import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,17 +30,18 @@ import devs.mulham.horizontalcalendar.utils.Utils;
  */
 public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T extends Calendar> extends RecyclerView.Adapter<VH> {
 
-    private final int itemResId;
     final HorizontalCalendar horizontalCalendar;
+    private final int itemResId;
     private final HorizontalCalendarPredicate disablePredicate;
     private final CalendarEventsPredicate eventsPredicate;
     private final int cellWidth;
-    private CalendarItemStyle disabledItemStyle;
-
+    private final Context context;
     protected Calendar startDate;
     protected int itemsCount;
+    private CalendarItemStyle disabledItemStyle;
 
-    protected HorizontalCalendarBaseAdapter(int itemResId, final HorizontalCalendar horizontalCalendar, Calendar startDate, Calendar endDate, HorizontalCalendarPredicate disablePredicate, CalendarEventsPredicate eventsPredicate) {
+    protected HorizontalCalendarBaseAdapter(int itemResId, final HorizontalCalendar horizontalCalendar, Calendar startDate, Calendar endDate, HorizontalCalendarPredicate disablePredicate, CalendarEventsPredicate eventsPredicate,
+                                            Context context) {
         this.itemResId = itemResId;
         this.horizontalCalendar = horizontalCalendar;
         this.disablePredicate = disablePredicate;
@@ -51,6 +53,7 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
 
         cellWidth = Utils.calculateCellWidth(horizontalCalendar.getContext(), horizontalCalendar.getNumberOfDatesOnScreen());
         itemsCount = calculateItemsCount(startDate, endDate);
+        this.context = context;
     }
 
     @Override
@@ -155,6 +158,10 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
     }
 
     protected abstract int calculateItemsCount(Calendar startDate, Calendar endDate);
+
+    protected Context getContext() {
+        return context;
+    }
 
     private class MyOnClickListener implements View.OnClickListener {
         private final RecyclerView.ViewHolder viewHolder;

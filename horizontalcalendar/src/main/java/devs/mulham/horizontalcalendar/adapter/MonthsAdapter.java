@@ -1,5 +1,7 @@
 package devs.mulham.horizontalcalendar.adapter;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.View;
@@ -25,8 +27,9 @@ import devs.mulham.horizontalcalendar.utils.Utils;
  */
 public class MonthsAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder, Calendar> {
 
-    public MonthsAdapter(HorizontalCalendar horizontalCalendar, Calendar startDate, Calendar endDate, HorizontalCalendarPredicate disablePredicate, CalendarEventsPredicate eventsPredicate) {
-        super(R.layout.hc_item_calendar, horizontalCalendar, startDate, endDate, disablePredicate, eventsPredicate);
+    public MonthsAdapter(HorizontalCalendar horizontalCalendar, Calendar startDate, Calendar endDate, HorizontalCalendarPredicate disablePredicate, CalendarEventsPredicate eventsPredicate,
+                         Context context) {
+        super(R.layout.hc_item_calendar, horizontalCalendar, startDate, endDate, disablePredicate, eventsPredicate, context);
     }
 
     @Override
