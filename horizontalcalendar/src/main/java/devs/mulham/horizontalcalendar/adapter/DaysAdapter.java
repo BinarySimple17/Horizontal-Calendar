@@ -32,7 +32,7 @@ public class DaysAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder, C
     @Override
     protected DateViewHolder createViewHolder(View itemView, int cellWidth) {
         final DateViewHolder holder = new DateViewHolder(itemView);
-        holder.layoutContent.setMinimumWidth(cellWidth);
+//        holder.layoutContent.setMinimumWidth(cellWidth);
 
         return holder;
     }
@@ -44,7 +44,7 @@ public class DaysAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder, C
 
         final Integer selectorColor = horizontalCalendar.getConfig().getSelectorColor();
         if (selectorColor != null) {
-            holder.selectionView.setBackgroundColor(selectorColor);
+//            holder.selectionView.setBackgroundColor(selectorColor);
         }
 
         holder.textMiddle.setText(DateFormat.format(config.getFormatMiddleText(), day));

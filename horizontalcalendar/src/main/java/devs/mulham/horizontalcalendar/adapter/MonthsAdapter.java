@@ -33,7 +33,7 @@ public class MonthsAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder,
     protected DateViewHolder createViewHolder(View itemView, int cellWidth) {
         final DateViewHolder holder = new DateViewHolder(itemView);
 
-        holder.layoutContent.setMinimumWidth(cellWidth);
+//        holder.layoutContent.setMinimumWidth(cellWidth);
         //holder.textTop.setVisibility(View.GONE);
 
         return holder;
@@ -46,7 +46,7 @@ public class MonthsAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder,
 
         final Integer selectorColor = horizontalCalendar.getConfig().getSelectorColor();
         if (selectorColor != null) {
-            holder.selectionView.setBackgroundColor(selectorColor);
+//            holder.selectionView.setBackgroundColor(selectorColor);
         }
 
         holder.textMiddle.setText(DateFormat.format(config.getFormatMiddleText(), month));

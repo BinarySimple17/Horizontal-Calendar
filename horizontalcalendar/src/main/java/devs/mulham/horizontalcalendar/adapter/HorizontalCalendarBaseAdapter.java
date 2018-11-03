@@ -61,11 +61,11 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
         viewHolder.itemView.setOnClickListener(new MyOnClickListener(viewHolder));
         viewHolder.itemView.setOnLongClickListener(new MyOnLongClickListener(viewHolder));
 
-        if (eventsPredicate != null) {
+/*        if (eventsPredicate != null) {
             initEventsRecyclerView(viewHolder.eventsRecyclerView);
         } else {
             viewHolder.eventsRecyclerView.setVisibility(View.GONE);
-        }
+        }*/
 
         return viewHolder;
     }
@@ -100,13 +100,13 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
         }
 
         List<CalendarEvent> events = eventsPredicate.events(date);
-        if ((events == null) || events.isEmpty()) {
+/*        if ((events == null) || events.isEmpty()) {
             viewHolder.eventsRecyclerView.setVisibility(View.GONE);
         } else {
             viewHolder.eventsRecyclerView.setVisibility(View.VISIBLE);
             EventsAdapter eventsAdapter = (EventsAdapter) viewHolder.eventsRecyclerView.getAdapter();
             eventsAdapter.update(events);
-        }
+        }*/
     }
 
     protected void applyStyle(VH viewHolder, Calendar date, int position) {
@@ -117,7 +117,7 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
             viewHolder.itemView.setEnabled(!isDisabled);
             if (isDisabled && (disabledItemStyle != null)) {
                 applyStyle(viewHolder, disabledItemStyle);
-                viewHolder.selectionView.setVisibility(View.INVISIBLE);
+//                viewHolder.selectionView.setVisibility(View.INVISIBLE);
                 return;
             }
         }
@@ -125,12 +125,12 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
         // Selected Day
         if (position == selectedItemPosition) {
             applyStyle(viewHolder, horizontalCalendar.getSelectedItemStyle());
-            viewHolder.selectionView.setVisibility(View.VISIBLE);
+//            viewHolder.selectionView.setVisibility(View.VISIBLE);
         }
         // Unselected Days
         else {
             applyStyle(viewHolder, horizontalCalendar.getDefaultStyle());
-            viewHolder.selectionView.setVisibility(View.INVISIBLE);
+//            viewHolder.selectionView.setVisibility(View.INVISIBLE);
         }
     }
 
