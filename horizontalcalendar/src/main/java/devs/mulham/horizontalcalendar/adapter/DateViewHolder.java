@@ -17,15 +17,15 @@ class DateViewHolder extends RecyclerView.ViewHolder {
     TextView textBottom;
     View selectionView;
     View layoutContent;
-    RecyclerView eventsRecyclerView;
+//    RecyclerView eventsRecyclerView;
 
     DateViewHolder(View rootView) {
         super(rootView);
         textTop = rootView.findViewById(R.id.hc_text_top);
-        textMiddle = rootView.findViewById(R.id.hc_text_middle);
-        textBottom = rootView.findViewById(R.id.hc_text_bottom);
+        textMiddle = rootView.findViewById(R.id.hc_text_number);
+        textBottom = rootView.findViewById(R.id.hc_text_day);
         layoutContent = rootView.findViewById(R.id.hc_layoutContent);
         selectionView = rootView.findViewById(R.id.hc_selector);
-        eventsRecyclerView = rootView.findViewById(R.id.hc_events_recyclerView);
+//        eventsRecyclerView = rootView.findViewById(R.id.hc_events_recyclerView);
     }
 }
