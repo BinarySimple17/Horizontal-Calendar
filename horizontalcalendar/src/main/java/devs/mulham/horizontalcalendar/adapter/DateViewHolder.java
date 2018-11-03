@@ -21,6 +21,7 @@ class DateViewHolder extends RecyclerView.ViewHolder {
     TextView textBottom;
 //    View selectionView;
 //    View layoutContent;
+    View layout;
     GradientDrawable circle;
     GradientDrawable bar;
 //    RecyclerView eventsRecyclerView;
@@ -34,6 +35,7 @@ class DateViewHolder extends RecyclerView.ViewHolder {
 //        selectionView = rootView.findViewById(R.id.hc_selector);
         circle = (GradientDrawable) textMiddle.getBackground();
         bar = (GradientDrawable) rootView.findViewById(R.id.bar).getBackground();
+        layout = rootView.findViewById(R.id.layout);
 //        eventsRecyclerView = rootView.findViewById(R.id.hc_events_recyclerView);
     }
 

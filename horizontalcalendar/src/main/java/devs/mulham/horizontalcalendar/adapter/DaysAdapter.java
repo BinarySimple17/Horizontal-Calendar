@@ -80,6 +80,10 @@ public class DaysAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder, C
 
     }
 
+    public interface DayClickListener{
+        void click ();
+    }
+
     @Override
     public void onBindViewHolder(DateViewHolder holder, int position, List<Object> payloads) {
         if ((payloads == null) || payloads.isEmpty()) {
