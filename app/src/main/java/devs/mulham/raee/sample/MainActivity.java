@@ -12,9 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
@@ -25,6 +28,7 @@ import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 public class MainActivity extends AppCompatActivity {
 
     private HorizontalCalendar horizontalCalendar;
+    SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +66,18 @@ public class MainActivity extends AppCompatActivity {
                     Random rnd = new Random();
                     @Override
                     public List<CalendarEvent> events(Calendar date) {
-                        List<CalendarEvent> events = new ArrayList<>();
-                        int count = rnd.nextInt(6);
+                        Calendar today = Calendar.getInstance();
+                        if (formatter.format(today.getTime()).equals(formatter.format(date.getTime()))) {
+                            List<CalendarEvent> events = new ArrayList<>();
+                            int count = rnd.nextInt(6);
 
-                        for (int i = 0; i <= count; i++){
-                            events.add(new CalendarEvent(Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)), "event"));
+                            for (int i = 0; i <= count; i++){
+                                events.add(new CalendarEvent(Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)), "event"));
+                            }
+
+                            return events;
                         }
-
-                        return events;
+                        return null;
                     }
                 })
                 .build();

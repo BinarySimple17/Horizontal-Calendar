@@ -2,6 +2,7 @@ package devs.mulham.horizontalcalendar.adapter;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
 import devs.mulham.horizontalcalendar.HorizontalLayoutManager;
+import devs.mulham.horizontalcalendar.R;
 import devs.mulham.horizontalcalendar.model.CalendarEvent;
 import devs.mulham.horizontalcalendar.model.CalendarItemStyle;
 import devs.mulham.horizontalcalendar.utils.CalendarEventsPredicate;
@@ -103,13 +105,15 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
         }
 
         List<CalendarEvent> events = eventsPredicate.events(date);
-/*        if ((events == null) || events.isEmpty()) {
-            viewHolder.eventsRecyclerView.setVisibility(View.GONE);
+        if ((events == null) || events.isEmpty()) {
+            viewHolder.setDayColor(ContextCompat.getColor(context, R.color.transparent));
+            viewHolder.setBarColor(ContextCompat.getColor(context, R.color.transparent));
         } else {
-            viewHolder.eventsRecyclerView.setVisibility(View.VISIBLE);
-            EventsAdapter eventsAdapter = (EventsAdapter) viewHolder.eventsRecyclerView.getAdapter();
-            eventsAdapter.update(events);
-        }*/
+            viewHolder.setBarColor(events.get(0).getColor());
+//            viewHolder.eventsRecyclerView.setVisibility(View.VISIBLE);
+//            EventsAdapter eventsAdapter = (EventsAdapter) viewHolder.eventsRecyclerView.getAdapter();
+//            eventsAdapter.update(events);
+        }
     }
 
     protected void applyStyle(VH viewHolder, Calendar date, int position) {

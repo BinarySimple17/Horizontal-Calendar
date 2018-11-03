@@ -67,11 +67,13 @@ public class DaysAdapter extends HorizontalCalendarBaseAdapter<DateViewHolder, C
             holder.textBottom.setVisibility(View.GONE);
         }
 
-        if (holder.textMiddle.getText().equals("11")) {
+/*        if (holder.textMiddle.getText().equals("11")) {
             holder.setDayColor(ContextCompat.getColor(super.getContext(), R.color.transparent25));
+            holder.setBarColor(ContextCompat.getColor(super.getContext(), R.color.transparent));
         } else {
             holder.setDayColor(ContextCompat.getColor(super.getContext(), R.color.transparent));
-        }
+            holder.setBarColor(ContextCompat.getColor(super.getContext(), R.color.transparent25));
+        }*/
 
         showEvents(holder, day);
         applyStyle(holder, day, position);

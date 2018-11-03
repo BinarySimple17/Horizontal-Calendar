@@ -1,5 +1,6 @@
 package devs.mulham.horizontalcalendar.adapter;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -21,6 +22,7 @@ class DateViewHolder extends RecyclerView.ViewHolder {
 //    View selectionView;
 //    View layoutContent;
     GradientDrawable circle;
+    GradientDrawable bar;
 //    RecyclerView eventsRecyclerView;
 
     DateViewHolder(View rootView) {
@@ -31,10 +33,14 @@ class DateViewHolder extends RecyclerView.ViewHolder {
 //        layoutContent = rootView.findViewById(R.id.hc_layoutContent);
 //        selectionView = rootView.findViewById(R.id.hc_selector);
         circle = (GradientDrawable) textMiddle.getBackground();
+        bar = (GradientDrawable) rootView.findViewById(R.id.bar).getBackground();
 //        eventsRecyclerView = rootView.findViewById(R.id.hc_events_recyclerView);
     }
 
     public void setDayColor(int color){
         circle.setColor(color);
+    }
+    public void setBarColor(int color) {
+        bar.setColor(color);
     }
 }
