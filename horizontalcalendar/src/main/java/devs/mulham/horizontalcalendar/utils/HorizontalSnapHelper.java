@@ -41,6 +41,9 @@ public class HorizontalSnapHelper extends LinearSnapHelper {
     }
 
     private void notifyCalendarListener(int selectedItemPosition){
+        if (horizontalCalendar.getCalendarListener() == null) {
+            return;
+        }
         if (!horizontalCalendar.isItemDisabled(selectedItemPosition)){
             horizontalCalendar.getCalendarListener()
                     .onDateSelected(horizontalCalendar.getDateAt(selectedItemPosition), selectedItemPosition);

@@ -76,8 +76,8 @@ public final class HorizontalCalendar {
         calendarView.setHorizontalScrollBarEnabled(false);
         calendarView.applyConfigFromLayout(this);
 
-        HorizontalSnapHelper snapHelper = new HorizontalSnapHelper();
-        snapHelper.attachToHorizontalCalendar(this);
+//        HorizontalSnapHelper snapHelper = new HorizontalSnapHelper();
+//        snapHelper.attachToHorizontalCalendar(this);
 
         if (disablePredicate == null) {
             disablePredicate = defaultDisablePredicate;
@@ -93,12 +93,12 @@ public final class HorizontalCalendar {
 
         calendarView.setAdapter(mCalendarAdapter);
         calendarView.setLayoutManager(new HorizontalLayoutManager(calendarView.getContext(), false));
-        calendarView.addOnScrollListener(new HorizontalCalendarScrollListener());
+//        calendarView.addOnScrollListener(new HorizontalCalendarScrollListener());
 
         post(new Runnable() {
             @Override
             public void run() {
-                centerToPositionWithNoAnimation(positionOfDate(defaultSelectedDate));
+                centerToPositionWithNoAnimation(positionOfDate(defaultSelectedDate), false);
             }
         });
 
@@ -132,7 +132,7 @@ public final class HorizontalCalendar {
     public void selectDate(Calendar date, boolean immediate) {
         int datePosition = positionOfDate(date);
         if (immediate) {
-            centerToPositionWithNoAnimation(datePosition);
+            centerToPositionWithNoAnimation(datePosition, true);
             if (calendarListener != null) {
                 calendarListener.onDateSelected(date, datePosition);
             }
@@ -163,7 +163,7 @@ public final class HorizontalCalendar {
      *
      * @param position The position to center the calendar to!
      */
-    void centerToPositionWithNoAnimation(final int position) {
+    void centerToPositionWithNoAnimation(final int position, boolean select) {
         if (position != -1) {
             final int oldSelectedItem = calendarView.getPositionOfCenterItem();
             int relativeCenterPosition = Utils.calculateRelativeCenterPosition(position, oldSelectedItem, numberOfDatesOnScreen / 2);
@@ -172,14 +172,16 @@ public final class HorizontalCalendar {
             }
 
             calendarView.scrollToPosition(relativeCenterPosition);
-            calendarView.post(new Runnable() {
-                @Override
-                public void run() {
-                    final int newSelectedItem = calendarView.getPositionOfCenterItem();
-                    //refresh to update background colors
-                    refreshItemsSelector(newSelectedItem, oldSelectedItem);
-                }
-            });
+            if (select) {
+                calendarView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        final int newSelectedItem = calendarView.getPositionOfCenterItem();
+                        //refresh to update background colors
+                        refreshItemsSelector(newSelectedItem, oldSelectedItem);
+                    }
+                });
+            }
         }
     }
 

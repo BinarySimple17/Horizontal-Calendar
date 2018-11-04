@@ -20,7 +20,6 @@ import devs.mulham.horizontalcalendar.R;
 import devs.mulham.horizontalcalendar.model.CalendarEvent;
 import devs.mulham.horizontalcalendar.model.CalendarItemStyle;
 import devs.mulham.horizontalcalendar.utils.CalendarEventsPredicate;
-import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarPredicate;
 import devs.mulham.horizontalcalendar.utils.Utils;
 
@@ -41,6 +40,8 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
     protected Calendar startDate;
     protected int itemsCount;
     private CalendarItemStyle disabledItemStyle;
+    private int lastSelected = -1;
+    private VH lastVH;
 
     protected HorizontalCalendarBaseAdapter(int itemResId, final HorizontalCalendar horizontalCalendar, Calendar startDate, Calendar endDate, HorizontalCalendarPredicate disablePredicate, CalendarEventsPredicate eventsPredicate,
                                             Context context) {
@@ -110,9 +111,6 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
             viewHolder.setBarColor(ContextCompat.getColor(context, R.color.transparent));
         } else {
             viewHolder.setBarColor(events.get(0).getColor());
-//            viewHolder.eventsRecyclerView.setVisibility(View.VISIBLE);
-//            EventsAdapter eventsAdapter = (EventsAdapter) viewHolder.eventsRecyclerView.getAdapter();
-//            eventsAdapter.update(events);
         }
     }
 
@@ -153,6 +151,12 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
         }
     }
 
+    protected void checkWasSelected(VH viewHolder, int position){
+        if (position == lastSelected ) {
+            viewHolder.clickDate(true);
+        }
+    }
+
     public void update(Calendar startDate, Calendar endDate, boolean notify) {
         this.startDate = startDate;
         itemsCount = calculateItemsCount(startDate, endDate);
@@ -168,9 +172,9 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
     }
 
     private class MyOnClickListener implements View.OnClickListener {
-        private final RecyclerView.ViewHolder viewHolder;
+        private final VH viewHolder;
 
-        MyOnClickListener(RecyclerView.ViewHolder viewHolder) {
+        MyOnClickListener(VH viewHolder) {
             this.viewHolder = viewHolder;
         }
 
@@ -182,6 +186,16 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
 
             horizontalCalendar.getCalendarView().setSmoothScrollSpeed(HorizontalLayoutManager.SPEED_SLOW);
             horizontalCalendar.centerCalendarToPosition(position);
+
+            if (position != lastSelected) {
+                viewHolder.clickDate(true);
+                horizontalCalendar.getCalendarListener().onDateSelected(horizontalCalendar.getDateAt(position), position);
+                if (lastVH != null) {
+                    lastVH.clickDate(false);
+                }
+            }
+            lastSelected = position;
+            lastVH = viewHolder;
         }
     }
 
@@ -194,7 +208,7 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
 
         @Override
         public boolean onLongClick(View v) {
-            HorizontalCalendarListener calendarListener = horizontalCalendar.getCalendarListener();
+/*            HorizontalCalendarListener calendarListener = horizontalCalendar.getCalendarListener();
             if (calendarListener == null) {
                 return false;
             }
@@ -202,7 +216,8 @@ public abstract class HorizontalCalendarBaseAdapter<VH extends DateViewHolder, T
             int position = viewHolder.getAdapterPosition();
             Calendar date = getItem(position);
 
-            return calendarListener.onDateLongClicked(date, position);
+            return calendarListener.onDateLongClicked(date, position);*/
+            return false;
         }
     }
 }

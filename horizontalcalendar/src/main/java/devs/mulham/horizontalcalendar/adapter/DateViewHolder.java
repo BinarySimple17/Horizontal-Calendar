@@ -1,9 +1,7 @@
 package devs.mulham.horizontalcalendar.adapter;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -19,11 +17,13 @@ class DateViewHolder extends RecyclerView.ViewHolder {
     TextView textTop;
     TextView textMiddle;
     TextView textBottom;
-//    View selectionView;
+    //    View selectionView;
 //    View layoutContent;
     View layout;
     GradientDrawable circle;
     GradientDrawable bar;
+    int selectedColor;
+    int textColor;
 //    RecyclerView eventsRecyclerView;
 
     DateViewHolder(View rootView) {
@@ -36,13 +36,30 @@ class DateViewHolder extends RecyclerView.ViewHolder {
         circle = (GradientDrawable) textMiddle.getBackground();
         bar = (GradientDrawable) rootView.findViewById(R.id.bar).getBackground();
         layout = rootView.findViewById(R.id.layout);
+        textColor = textMiddle.getCurrentTextColor();
 //        eventsRecyclerView = rootView.findViewById(R.id.hc_events_recyclerView);
     }
 
-    public void setDayColor(int color){
+    public void setDayColor(int color) {
         circle.setColor(color);
     }
+
     public void setBarColor(int color) {
-        bar.setColor(color);
+        selectedColor = color;
+        bar.setColor(selectedColor);
+    }
+
+    public void clickDate(boolean select) {
+        if (select) {
+            circle.setColor(selectedColor);
+            bar.setColor(Color.TRANSPARENT);
+            textMiddle.getPaint().setColor(Color.WHITE);
+            textMiddle.invalidate();
+        } else {
+            circle.setColor(Color.TRANSPARENT);
+            bar.setColor(selectedColor);
+            textMiddle.getPaint().setColor(textColor);
+            textMiddle.invalidate();
+        }
     }
 }

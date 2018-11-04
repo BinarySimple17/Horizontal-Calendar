@@ -57,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     .formatBottomText("EEE")
                     .showTopText(true)
                     .showBottomText(true)
-                    .textColor(Color.LTGRAY, Color.WHITE)
-                    .colorTextMiddle(Color.LTGRAY, Color.parseColor("#ffd54f"))
+//                    .selectorColor(Color.WHITE)
+                    .textColor(Color.LTGRAY, Color.parseColor("#FF0000"))
+//                    .colorTextMiddle(Color.LTGRAY, Color.WHITE)
                 .end()
                 .defaultSelectedDate(defaultSelectedDate)
                 .addEvents(new CalendarEventsPredicate() {
